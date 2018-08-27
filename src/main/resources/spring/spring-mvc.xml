@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--1.开启SpringIoc 自动扫描注解包  -->
+    <context:component-scan base-package="com.*"/>
+    <!--2. 开启注解 -->
+    <mvc:annotation-driven/>
+    <!-- 2.静态资源默认servlet配置
+        (1)加入对静态资源的处理：js,gif,png
+        (2)允许使用"/"做整体映射-->
+    <mvc:resources location="/js/" mapping="/js/**"/>
+    <mvc:resources location="/images/" mapping="/images/**"/>
+    <mvc:resources mapping="/css/**" location="css/**"/>
+    <mvc:default-servlet-handler/>
+
+    <!-- 系统管理员成功登录后跳转首页welcome.jsp -->
+    <mvc:view-controller path="/admin_login_success.do" view-name="/admin/welcome"/>
+    <!-- 经理成功登录后跳转首页welcome.jsp -->
+    <mvc:view-controller path="/manager_login_success.do" view-name="/manager/welcome"/>
+    <!-- 普通员工成功登录后跳转首页welcome.jsp -->
+    <mvc:view-controller path="/employee_login_success.do" view-name="/person/welcome"/>
+    <!-- 出错页面 -->
+    <mvc:view-controller path="/login_error.do" view-name="/error"/>
+    <!-- 系统管理员相关界面 -->
+    <mvc:view-controller path="/admin_query.do" view-name="/admin/useradmin"/>
+    <mvc:view-controller path="/admin_add.do" view-name="/admin/personadd"/>
+    <mvc:view-controller path="/admin_remove.do" view-name="/admin/empadmin"/>
+    <mvc:view-controller path="/admin_update.do" view-name="/admin/empdistribute"/>
+    <mvc:view-controller path="/admin_desc.do" view-name="/admin/persondesc"/>
+    <!-- 员工相关界面 -->
+    <mvc:view-controller path="/person_task.do" view-name="/person/task"/>
+    <mvc:view-controller path="/person_taskview.do" view-name="/person/taskview"/>
+    <mvc:view-controller path="/person_newpro.do" view-name="/person/newpro"/>
+    <!-- 主管界面 -->
+    <mvc:view-controller path="/manager_taskview.do" view-name="/manager/taskview"/>
+    <mvc:view-controller path="/manager_checkper.do" view-name="/manager/checkper"/>
+    <mvc:view-controller path="/manager_task.do" view-name="/manager/task"/>
+    <mvc:view-controller path="/manager_personinfo.do" view-name="/manager/personinfo"/>
+    <mvc:view-controller path="/manager_taskparticular.do" view-name="/manager/taskparticular"/>
+    <mvc:view-controller path="/manager_taskundone.do" view-name="/manager/taskundone"/>
+    <mvc:view-controller path="/manager_adjust.do" view-name="/manager/adjust"/>
+    <mvc:view-controller path="/manager_intendance.do" view-name="/manager/intendance"/>
+    <mvc:view-controller path="/manager_program.do" view-name="/manager/program"/>
+    <mvc:view-controller path="/manager_programinten.do" view-name="/manager/programinten"/>
+
+    <!--3.配置视图解析器  -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+</beans>
